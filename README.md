@@ -1,8 +1,6 @@
-# Complete `README.md` for WinSol Web Automation
+###WinSol Web Automation
 
-Copy the entire block below and paste it into your `README.md` file.
 
-```markdown
 # WinSol Web Automation
 
 An enterprise-grade, URL + Excel automation framework using **Playwright**, **TypeScript**, and **Claude Code (Agent)**. 
