@@ -1,6 +1,3 @@
-###WinSol Web Automation
-
-
 # WinSol Web Automation
 
 An enterprise-grade, URL + Excel automation framework using **Playwright**, **TypeScript**, and **Claude Code (Agent)**. 
