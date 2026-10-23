@@ -1,0 +1,24 @@
+{
+  "name": "winsol-web-automation",
+  "private": true,
+  "scripts": {
+    "test":           "npm run test:smoke && npm run test:web && npm run verify:workbook",
+    "test:smoke":     "playwright test tests/smoke.spec.ts",
+    "test:web":       "playwright test tests/excel-driven.spec.ts",
+    "test:btl":       "playwright test tests/excel-driven.spec.ts --grep \"TC-BTL\"",
+    "test:bro":       "playwright test tests/excel-driven.spec.ts --grep \"TC-BRO\"",
+    "test:bm":        "playwright test tests/excel-driven.spec.ts --grep \"TC-BM\"",
+    "test:analysis":  "playwright test tests/excel-driven.spec.ts --grep \"TC-RUM\"",
+    "test:hq":        "playwright test tests/excel-driven.spec.ts --grep \"TC-HQ\"",
+    "test:bfo":       "playwright test tests/excel-driven.spec.ts --grep \"TC-BFO\"",
+    "verify:workbook":"ts-node scripts/verify-workbook.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "@types/node": "^22.0.0",
+    "dotenv": "^16.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.0",
+    "xlsx": "^0.18.5"
+  }
+}
