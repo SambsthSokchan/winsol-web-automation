@@ -1,3 +1,8 @@
+# Complete `README.md` for WinSol Web Automation
+
+Copy the entire block below and paste it into your `README.md` file.
+
+```markdown
 # WinSol Web Automation
 
 An enterprise-grade, URL + Excel automation framework using **Playwright**, **TypeScript**, and **Claude Code (Agent)**. 
@@ -51,3 +56,92 @@ winsol-web-automation/
 │
 ├── reports/                    # Auto-generated HTML reports (Gitignored)
 └── screenshots/                # Auto-captured failure screenshots (Gitignored)
+```
+
+---
+
+## 🚀 Setup & Installation
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/YOUR_USERNAME/winsol-web-automation.git
+cd winsol-web-automation
+```
+
+### 2. Configure Environment Variables
+Copy the example file and fill in your credentials:
+```bash
+cp .env.example .env
+```
+Open `.env` and set your `WEB_PORTAL_URL` and the passwords for all 6 roles.
+
+### 3. Install Dependencies
+```bash
+npm install
+npx playwright install chromium
+```
+
+### 4. Add the Workbook
+Place your `WinSol_7_Automation_Sheets.xlsx` file inside the `test-data/` folder. 
+
+---
+
+## 🏃‍♂️ Running the Tests
+
+The framework is configured to allow you to run the entire suite, or test a specific stage/role.
+
+### Run the Complete Pipeline
+This runs a quick smoke test, executes all 502 web cases, and verifies the workbook integrity at the end.
+```bash
+npm test
+```
+
+### Run Specific Stages
+You can target individual stages using the test IDs (e.g., `TC-BTL` for Stage 1).
+```bash
+npm run test:btl       # Stage 1 (112 cases)
+npm run test:bro       # Stage 2 (85 cases)
+npm run test:bm        # Stage 3 (61 cases)
+npm run test:analysis  # Stage 4 (117 cases)
+npm run test:hq        # Stage 5 (91 cases)
+npm run test:bfo       # Stage 6 (36 cases)
+```
+
+### Debugging visually
+By default, tests run in headless mode (invisible). To watch the browser as it works, set the `HEADED` environment variable:
+```bash
+# Windows CMD
+set HEADED=true && npm run test:btl
+
+# Mac/Linux
+HEADED=true npm run test:btl
+```
+
+### Pre-flight Checks
+Verify that your workbook structure and row mappings are correct before running tests:
+```bash
+npm run verify:workbook
+```
+
+---
+
+## 🤖 Claude Code Integration
+
+This project is designed to be maintained and expanded by Claude Code. 
+If you need to add new POM actions or write new tests, use the Playwright MCP server so Claude can explore the live page.
+
+To authorize Claude:
+```bash
+claude mcp add playwright npx @playwright/mcp@latest --caps=testing
+```
+
+Refer to `CLAUDE.md` for the strict locator rules (Semantic locators only, no XPath, no hard waits).
+
+---
+
+## 🛡️ Reliability Features
+
+- **Row-Identity Protection:** The writer verifies that the Excel row it is about to write to actually belongs to the test case ID before writing. If the sheet is modified mid-run, it skips the row rather than corrupting data.
+- **Atomic Writes:** Test results are never written one by one. They are staged in RAM and flushed in one single atomic operation to prevent workbook corruption.
+- **Fail-Fast Setup:** `global-setup.ts` will halt execution immediately if the Excel workbook is currently open in Microsoft Excel (prevents `EBUSY` file lock errors).
+```
