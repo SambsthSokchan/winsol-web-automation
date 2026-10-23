@@ -19,8 +19,8 @@ This framework reads test cases directly from the master UAT Excel workbook, dri
 ---
 
 ## 📁 Directory Structure
+
 ```markdown
-```text
 winsol-web-automation/
 ├── .env                        # Real credentials (Gitignored)
 ├── .env.example                # Template for credentials
