@@ -144,4 +144,3 @@ Refer to `CLAUDE.md` for the strict locator rules (Semantic locators only, no XP
 - **Row-Identity Protection:** The writer verifies that the Excel row it is about to write to actually belongs to the test case ID before writing. If the sheet is modified mid-run, it skips the row rather than corrupting data.
 - **Atomic Writes:** Test results are never written one by one. They are staged in RAM and flushed in one single atomic operation to prevent workbook corruption.
 - **Fail-Fast Setup:** `global-setup.ts` will halt execution immediately if the Excel workbook is currently open in Microsoft Excel (prevents `EBUSY` file lock errors).
-```
